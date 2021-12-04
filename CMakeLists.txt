@@ -30,4 +30,4 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-add_executable(Z_DUMMY_TARGET ${SRC_LIST} src/effects/Effect.cpp src/effects/Effect.h src/effects/FadeInAndOut.cpp src/effects/FadeInAndOut.h)
+add_executable(Z_DUMMY_TARGET ${SRC_LIST} src/effects/Random.cpp src/effects/Random.h src/effects/MovingLines.cpp src/effects/MovingLines.h src/effects/Spots.cpp src/effects/Spots.h)

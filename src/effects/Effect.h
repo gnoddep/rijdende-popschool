@@ -7,15 +7,28 @@
 
 #include <FastLED.h>
 
+#include "../leds/LedGroup.h"
+
 class Effect {
+private:
+    LedGroup& leds;
+
+    unsigned long startMilliseconds = 0;
+    unsigned long endMilliseconds = 0;
+
 protected:
-    CRGB *leds = nullptr;
-    unsigned ledCount = 0;
+    LedGroup& getLeds();
+    void clear();
 
 public:
-    Effect(CRGB *leds, unsigned ledCount);
-    virtual void run(unsigned long milliSeconds) = 0;
-};
+    explicit Effect(LedGroup& leds): leds(leds) {};
 
+    void start(unsigned long milliseconds, unsigned long runtimeMilliseconds);
+    [[nodiscard]] bool shouldRun(unsigned long milliseconds) const;
+
+    virtual void init();
+    virtual void run(unsigned long milliseconds) = 0;
+    virtual void deinit() {};
+};
 
 #endif //RIJDENDE_POPSCHOOL_EFFECT_H
