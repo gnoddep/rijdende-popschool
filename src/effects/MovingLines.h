@@ -22,7 +22,7 @@ public:
     explicit MovingLines(long width, long height, LedGroup& leds);
 
     void run(unsigned long milliseconds) override;
-    void deinit() override;
+    void init() override;
 };
 
 #endif //RIJDENDE_POPSCHOOL_MOVINGLINES_H

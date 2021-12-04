@@ -32,7 +32,7 @@ bool Effect::shouldRun(unsigned long milliseconds) const {
 }
 
 void Effect::init() {
-    FastLED.setBrightness(255);
+    FastLED.setBrightness(32);
     this->clear();
 }
 

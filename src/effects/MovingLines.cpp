@@ -7,8 +7,7 @@
 MovingLines::MovingLines(long width, long height, LedGroup &leds):
     Effect(leds),
     width(width),
-    height(height),
-    colour(CRGB((random(256) << 16) + (random(256) << 8) + random(256))) {};
+    height(height) {};
 
 void MovingLines::run(unsigned long milliseconds) {
     LedGroup& leds = this->getLeds();
@@ -39,6 +38,7 @@ void MovingLines::run(unsigned long milliseconds) {
     delay(50);
 }
 
-void MovingLines::deinit() {
+void MovingLines::init() {
+    Effect::init();
     this->colour = CRGB((random(256) << 16) + (random(256) << 8) + random(256));
 }

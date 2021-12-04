@@ -16,7 +16,38 @@
 #define DATA_PIN 4
 #define CLOCK_PIN 5
 
-CRGB ledsStorage[NUM_LEDS];
+CRGB ledsStorage[NUM_LEDS] = {
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black, CRGB::Black,
+        CRGB::Black,
+        CRGB::Black, CRGB::Black,
+};
+
 unsigned squareMapping[NUM_LEDS] = {
     0,   1,   2,   3,   4,   5,   6,   7,
     15,  14,  13,  12,  11,  10,   9,   8,
@@ -53,7 +84,7 @@ Random randomLeds(leds);
 bool firstRun = true;
 unsigned effectIdx = 0;
 std::array<EffectConfiguration, 4> effects = {{
-    {spots, 5000, 15000, "Moving Lines"},
+    {spots, 5000, 15000, "Spots"},
     {randomLeds, 1000, 2000, "Random"},
     {movingLines, 4000, 8000, "Moving Lines"},
     {randomLeds, 1000, 2000, "Random"},
@@ -75,6 +106,7 @@ void setup() {
     CFastLED::addLeds<LPD8806, DATA_PIN, CLOCK_PIN, BRG>(ledsStorage, NUM_LEDS);
 
     FastLED.clear();
+    FastLED.setBrightness(32);
 
     for (unsigned idx = 0; idx < leds.getSize(); idx++) {
         leds.setColour(idx, CRGB::Black);
@@ -93,7 +125,7 @@ void loop() {
         firstRun = false;
     } else if (!effect->shouldRun(milliseconds)) {
         effects[effectIdx].runtime = random(effects[effectIdx].minRuntime, effects[effectIdx].maxRuntime);
-        
+
         effect->deinit();
 
         ++effectIdx;
